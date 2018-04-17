@@ -7,10 +7,14 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var getapi = require('./routes/getapi');
+var postapi = require('./routes/postapi');
 
 var app = express();
 var mysql = require('mysql')
 var orm = require('orm');
+
+var config = require('./config');
 
 var opts = {
   host:     'localhost',
@@ -20,38 +24,14 @@ var opts = {
   query:    {pool: true}
 };
 
-var connection = mysql.createConnection({
-  host:     'localhost',
-  database: 'hanliDB',
-  protocol: 'mysql',
-  port:     '3306',
-  query:    {pool: true}
-});
+var connection = mysql.createConnection(config.sql);
 
 connection.connect();
 
-const getProductList = (connection) => {
-  var  sql = 'SELECT * FROM product_list';
-  connection.query(sql,function (err, result) {
-    if(err){
-      console.log('[SELECT ERROR] - ',err.message);
-      return;
-    }
-   console.log(result);
-   result.map(item => {
-     console.log(item.id)
-   })
-   return result;
-  });
-}
-
-
 const addProduct = (connection) => {
-
   var addSql = 'INSERT INTO product_list(id, title, number, date) VALUES(0, ?, ?, ?)';
   let date = (new Date()).getTime()
   var addSqlParams = ['title1','3', '2017-11-20'];
-
   connection.query(addSql, addSqlParams, (err, result) => {
     if(err){
       console.log('[INSERT ERROR] - ',err.message);
@@ -62,7 +42,7 @@ const addProduct = (connection) => {
   });
 }
 
-let productList = getProductList(connection)
+// let productList = getProductList(connection)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -78,6 +58,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/get', getapi);
+app.use('/post', postapi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
