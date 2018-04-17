@@ -58,8 +58,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/get', getapi);
-app.use('/post', postapi);
+app.use('/ajax/get', getapi);
+app.use('/ajax/post', postapi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
