@@ -16,23 +16,14 @@ var orm = require('orm');
 
 var config = require('./config');
 
-var opts = {
-  host:     'localhost',
-  database: 'hanliDB',
-  protocol: 'mysql',
-  port:     '3306',
-  query:    {pool: true}
-};
-
 var connection = mysql.createConnection(config.sql);
 
 connection.connect();
 
 const keepQuery = () => {
-  console.log(new Date());
-  var sql = "select 1";
+  var sql = "SELECT * FROM tester_list";
   connection.query(sql, function (err, res) {
-      console.log(res);
+      console.log('+1s');
   });
 }
 
