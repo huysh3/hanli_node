@@ -28,19 +28,15 @@ var connection = mysql.createConnection(config.sql);
 
 connection.connect();
 
-const addProduct = (connection) => {
-  var addSql = 'INSERT INTO product_list(id, title, number, date) VALUES(0, ?, ?, ?)';
-  let date = (new Date()).getTime()
-  var addSqlParams = ['title1','3', '2017-11-20'];
-  connection.query(addSql, addSqlParams, (err, result) => {
-    if(err){
-      console.log('[INSERT ERROR] - ',err.message);
-      return;
-    }
-    console.log('INSERT ID:',result);
-    return result;
+const keepQuery = () => {
+  console.log(new Date());
+  var sql = "select 1";
+  connection.query(sql, function (err, res) {
+      console.log(res);
   });
 }
+
+setInterval(keepQuery, 1000);
 
 // let productList = getProductList(connection)
 
