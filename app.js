@@ -18,6 +18,21 @@ var config = require('./config');
 
 var connection = mysql.createConnection(config.sql);
 
+var exec = require('child_process').exec;
+
+var cmdStr = 'pm2 restart www';
+
+setTimeout(() => {
+  exec(cmdStr, function(err,stdout,stderr){
+    if(err) {
+        console.log('get weather api error:'+stderr);
+    } else {
+        var data = JSON.parse(stdout);
+        console.log(data);
+    }
+  });
+}, 10000)
+
 connection.connect();
 
 const keepQuery = () => {

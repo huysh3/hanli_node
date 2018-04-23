@@ -7,7 +7,6 @@ var connection = mysql.createConnection(config.sql);
 connection.connect();
 
 router.get('/add_truck', (req, res, next) => {
-  // console.log(req.query)
   var addSql = 'INSERT INTO truck_list(id, name, type, status, start_time) VALUES(0, ?, ?, ?, ?)';
   var addSqlParams = [req.query.name, req.query.type, req.query.status, req.query.start_time];
   connection.query(addSql, addSqlParams, (err, result) => {
