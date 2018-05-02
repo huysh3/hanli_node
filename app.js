@@ -58,7 +58,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/ajax/admin', index);
 app.use('/users', users);
 app.use('/ajax/get', getapi);
 app.use('/ajax/post', postapi);
