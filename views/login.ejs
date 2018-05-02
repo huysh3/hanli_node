@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Costa</title>
+    <style media="screen">
+      @font-face {
+        font-family: 'iconfont';  /* project id 235224 */
+        src: url('https://costa.wechatify.com/Public/font/font_235224_l1cki3nsy9fi529.eot');
+        src: url('https://costa.wechatify.com/Public/font/font_235224_l1cki3nsy9fi529.eot?#iefix') format('embedded-opentype'),
+        url('https://costa.wechatify.com/Public/font/font_235224_l1cki3nsy9fi529.woff') format('woff'),
+        url('https://costa.wechatify.com/Public/font/font_235224_l1cki3nsy9fi529.ttf') format('truetype'),
+        url('https://costa.wechatify.com/Public/font/font_235224_l1cki3nsy9fi529.svg#iconfont') format('svg');
+      }
+      .iconfont{
+        font-family:"iconfont" !important;
+        font-size:16px;font-style:normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        background: url('https://costa.wechatify.com/Public/img/login-bg.jpg') 100vw 100vh;
+        background-size: cover;
+      }
+      .background--bg {
+        position: absolute;;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+      }
+      .modal--container {
+        width: 36vw;
+        height: 400px;
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 8px;
+      }
+      .modal--container header {
+        text-align: center;
+        padding: 40px 0;
+        font-size: 24px;
+        color: rgb(0, 53, 105);
+        font-weight: bold;
+        background-color: rgb(254, 208, 35);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+      .modal--container .modal--body {
+        padding-top: 20px;
+        background-color: #fff;
+        text-align: center;
+      }
+      input {
+        border: 0;
+        display: inline-block;
+        border-bottom: 1px solid rgb(181, 197, 215);
+        width: 20vw;
+        height: 40px;
+        margin: 10px auto;
+        box-sizing: border-box;
+        padding-left: 50px;
+        font-size: 22px;
+      }
+      input:first-child {
+        margin-top: 40px;
+      }
+      input:last-child {
+        margin-bottom: 40px;
+      }
+      footer {
+        display: block;
+        text-align: center;
+        padding: 20px;
+        padding-bottom: 40px;
+        background-color: #fff;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+      .login--btn {
+        display: inline-block;
+        width: 20vw;
+        background-color: rgb(0, 53, 105);
+        border: 1px solid rgb(0, 53, 105);
+        color: #fff;
+        padding: 10px 0;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all .4s ease;
+      }
+      .login--btn:hover {
+        background-color: #fff;
+        border: 1px solid rgb(0, 53, 105);
+        color: rgb(0, 53, 105);
+      }
+      .input--container {
+        position: relative;
+        display: inline-block;
+      }
+      .input--container .iconfont {
+        position: absolute;
+        top: 20px;
+        font-size: 20px;
+        color: rgb(181, 197, 215);
+        left: 10px;
+      }
+      ::-webkit-input-placeholder {
+        font-size: 20px;
+        font-weight: 200;
+        color: rgb(181, 197, 215);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="modal--container">
+      <header class="modal--header">
+        <img style="width: 100px; display: inline-block;" src="https://wilson-1255767063.cosgz.myqcloud.com/2018-05-02-hanliLogo.png" alt=""><br>
+        Devices Management System
+      </header>
+      <div class="modal--body">
+        <div class="input--container">
+          <i class="iconfont">&#xe6e7;</i>
+          <input id="username" type="text" name="" value="" placeholder="Account">
+        </div>
+        <div class="input--container">
+          <i class="iconfont">&#xe653;</i>
+          <input id="password" type="password" name="" value="" placeholder="Password">
+        </div>
+      </div>
+      <footer>
+        <div class="login--btn">
+          Sign In
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script src="https://costa.wechatify.com/Public/js/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.login--btn').click(function() {
+        console.log($('#username').val())
+        console.log($('#password').val())
+        $.ajax({
+          url: 'https://costa.wechatify.com/CMS-V1/Admin/loginAction',
+          type: 'post',
+      data: {
+      account: $('#username').val(),
+      password: $('#password').val()
+      },
+          success: function(res) {
+            if (JSON.parse(res).code == '1') {
+              window.location.href = 'https://costa.wechatify.com/CMS3/';
+            } else {
+              alert(JSON.parse(res).msg)
+            }
+          },
+          fail: function(err) {
+            alert('Login fail! Try again!')
+            alert(err)
+          }
+        })
+      })
+    })
+  </script>
+</html>
+
