@@ -9,6 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var getapi = require('./routes/getapi');
 var postapi = require('./routes/postapi');
+var deleteapi = require('./routes/deleteapi');
 
 var app = express();
 var mysql = require('mysql')
@@ -71,6 +72,7 @@ app.use('/ajax/admin', index);
 app.use('/users', users);
 app.use('/ajax/get', getapi);
 app.use('/ajax/post', postapi);
+app.use('/ajax/delete', deleteapi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -87,7 +89,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(err);
 });
 
 module.exports = app;
