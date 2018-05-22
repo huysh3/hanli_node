@@ -49,4 +49,40 @@ router.get('/company_info', (req, res, next) => {
   });
 });
 
+router.get('/qs_list', (req, res, next) => {
+  var  sql = 'SELECT * FROM qs_list';
+  connection.query(sql, (err, result) => {
+    if(err){
+      console.log('[SELECT ERROR] - ',err.message);
+      return;
+    }
+   console.log(result);
+   res.json(result);
+  });
+});
+
+router.get('/company_qualification_list', (req, res, next) => {
+  var  sql = 'SELECT * FROM company_qualification_list';
+  connection.query(sql, (err, result) => {
+    if(err){
+      console.log('[SELECT ERROR] - ',err.message);
+      return;
+    }
+   console.log(result);
+   res.json(result);
+  });
+});
+
+router.get('/product_list', (req, res, next) => {
+  var  sql = 'SELECT * FROM product_list';
+  connection.query(sql, (err, result) => {
+    if(err){
+      console.log('[SELECT ERROR] - ',err.message);
+      return;
+    }
+   console.log(result);
+   res.json(result);
+  });
+});
+
 module.exports = router;

@@ -33,4 +33,46 @@ router.get('/add_tester', (req, res, next) => {
   });
 })
 
+router.get('/add_qs', (req, res, next) => {
+  // console.log(req.query)
+  var addSql = 'INSERT INTO qs_list(id, img_url) VALUES(0, ?)';
+  var addSqlParams = [req.query.img_url];
+  connection.query(addSql, addSqlParams, (err, result) => {
+    if(err){
+      console.log('[INSERT ERROR] - ',err.message);
+      res.json('error')
+    }
+    console.log('INSERT ID:',result);
+    res.json('success')
+  });
+})
+
+router.get('/add_company_qualification', (req, res, next) => {
+  // console.log(req.query)
+  var addSql = 'INSERT INTO company_qualification_list(id, img_url) VALUES(0, ?)';
+  var addSqlParams = [req.query.img_url];
+  connection.query(addSql, addSqlParams, (err, result) => {
+    if(err){
+      console.log('[INSERT ERROR] - ',err.message);
+      res.json('error')
+    }
+    console.log('INSERT ID:',result);
+    res.json('success')
+  });
+})
+
+router.get('/add_product', (req, res, next) => {
+  // console.log(req.query)
+  var addSql = 'INSERT INTO product_list(id, name, img_url) VALUES(0, ?, ?)';
+  var addSqlParams = [req.query.img_url, req.query.name];
+  connection.query(addSql, addSqlParams, (err, result) => {
+    if(err){
+      console.log('[INSERT ERROR] - ',err.message);
+      res.json('error')
+    }
+    console.log('INSERT ID:',result);
+    res.json('success')
+  });
+})
+
 module.exports = router;
