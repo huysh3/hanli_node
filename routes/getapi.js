@@ -85,4 +85,16 @@ router.get('/product_list', (req, res, next) => {
   });
 });
 
+router.get('/company_info', (req, res, next) => {
+  var  sql = 'SELECT * FROM company_info';
+  connection.query(sql, (err, result) => {
+    if(err){
+      console.log('[SELECT ERROR] - ',err.message);
+      return;
+    }
+   console.log(result);
+   res.json(result);
+  });
+});
+
 module.exports = router;

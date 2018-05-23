@@ -75,4 +75,18 @@ router.get('/add_product', (req, res, next) => {
   });
 })
 
+router.get('/update_company_info', (req, res, next) => {
+  // console.log(req.query)
+  var addSql = 'UPDATE company_info SET content=? WHERE id=1';
+  var addSqlParams = [req.query.content];
+  connection.query(addSql, addSqlParams, (err, result) => {
+    if(err){
+      console.log('[INSERT ERROR] - ',err.message);
+      res.json('error')
+    }
+    console.log('INSERT ID:',result);
+    res.json('success')
+  });
+})
+
 module.exports = router;

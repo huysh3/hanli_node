@@ -33,6 +33,45 @@ router.get('/delete_truck', (req, res, next) => {
   });
 });
 
+router.get('/delete_product', (req, res, next) => {
+  console.log(req.query.id);
+  var  sql = 'DELETE FROM product_list WHERE id=' + req.query.id;
+  connection.query(sql, (err, result) => {
+    if(err){
+      console.log('[SELECT ERROR] - ',err.message);
+      return;
+    }
+   console.log(result);
+   res.json(result);
+  });
+});
+
+router.get('/delete_company_qualification', (req, res, next) => {
+  console.log(req.query.id);
+  var  sql = 'DELETE FROM company_qualification_list WHERE id=' + req.query.id;
+  connection.query(sql, (err, result) => {
+    if(err){
+      console.log('[SELECT ERROR] - ',err.message);
+      return;
+    }
+   console.log(result);
+   res.json(result);
+  });
+});
+
+router.get('/delete_qs', (req, res, next) => {
+  console.log(req.query.id);
+  var  sql = 'DELETE FROM qs_list WHERE id=' + req.query.id;
+  connection.query(sql, (err, result) => {
+    if(err){
+      console.log('[SELECT ERROR] - ',err.message);
+      return;
+    }
+   console.log(result);
+   res.json(result);
+  });
+});
+
 // router.get('/truck_list', (req, res, next) => {
 //   var  sql = 'SELECT * FROM truck_list';
 //   connection.query(sql, (err, result) => {
